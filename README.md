@@ -11,6 +11,7 @@ Gathering: Webcrawlers
     With? cully, go-query, 
     ToCrawl? What to crawl and how is it triggered
     Add to cassandra Db
+    api repo imports from  http://go-search.org/ 
 
 
 Client Interaction:
