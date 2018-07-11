@@ -51,23 +51,24 @@ func main() {
 	fmt.Print("Repos: ")
 	fmt.Println(len(data))
 
+	// Limit size to 65k
+	var data1 []string
+	data1 = data[:60000]
+
 	// TODO: Insert slice of repos to cassandra to ref later
 	var created = false
 	var gocqlUUID gocql.UUID
 	gocqlUUID = gocql.TimeUUID()
-	if err := cassandra.Session.Query(`INSERT INTO repolist (id, repos) VALUES (?,?)`, gocqlUUID, data).Exec(); err != nil {
+	if err := cassandra.Session.Query(`INSERT INTO repolist (id, repos) VALUES (?,?)`, gocqlUUID, data1).Exec(); err != nil {
 		log.Fatal(err)
 	} else {
 		created = true
 	}
-
-	// Check Cassandra
 	fmt.Println(created)
 	if created {
 		fmt.Println("user_id", gocqlUUID)
-	} else {
-		fmt.Println("errors")
 	}
+
 	// TODO: Cycle through repos and pop cassandra db for each repo and who imports it
 
 	// Package_depends Action:
