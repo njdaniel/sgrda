@@ -49,7 +49,7 @@ func main() {
 	var data []string
 	err = json.NewDecoder(resp.Body).Decode(&data)
 	fmt.Print("Repos: ")
-	fmt.Println(data)
+	fmt.Println(len(data))
 
 	// TODO: Insert slice of repos to cassandra to ref later
 	var created = false
